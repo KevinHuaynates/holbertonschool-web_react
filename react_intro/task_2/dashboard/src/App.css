@@ -1,0 +1,92 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 20vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    /* Agrega cualquier estilo adicional necesario para el logo */
+  }
+}
+
+.App-header {
+  background-color: white;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: calc(16px + 2vmin);
+  color: red;
+  position: relative; /* Añade esta propiedad para utilizar posiciones absolutas en los pseudo-elementos */
+}
+
+.App-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: red;
+}
+
+
+
+.App-body {
+  background-color: #ffffff;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: calc(14px + 2vmin);
+  color: #282c34;
+}
+
+.App-footer {
+  background-color: white;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: calc(16px + 3vmin);
+  color: black;
+  position: fixed; /* Añade esta propiedad para utilizar posiciones absolutas en los pseudo-elementos */
+  left: 0;
+  width: 100%;
+  z-index: 2; /* Ajustar z-index si es necesario */
+}
+
+.App-footer::before {
+  content: "";
+  position: absolute;
+  top: 0 ;
+  bottom:-10px ; /* Mover la línea divisoria hacia arriba */
+  left: 0;
+  width: 100%;
+  height: 8px; /* Aumentar el grosor de la línea */
+  background-color: red;
+  z-index: 1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+

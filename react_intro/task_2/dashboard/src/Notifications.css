@@ -1,0 +1,16 @@
+.Notifications {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.Notifications button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.Notifications img {
+  width: 20px;
+  height: 20px;
+}
+
