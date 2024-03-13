@@ -5,11 +5,11 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
     entry: './js/dashboard_main.js',
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'bundle.js',
+        filename: 'main.js',
     },
     module: {
         rules: [
