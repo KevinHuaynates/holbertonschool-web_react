@@ -11,9 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "webpack": "^5.90.3",
-    "webpack-cli": "^5.1.4",
-    "jquery": "^3.7.1",
-    "lodash": "^4.17.21"
+    "webpack",
+    "webpack-cli",
+    "jquery",
+    "lodash"
   }
 }
