@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
     "webpack": "^5.90.3",
