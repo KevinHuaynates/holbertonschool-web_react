@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "webpack serve --config webpack.config.js --mode development"
+    "start-dev": "webpack-dev-server --open"
   },
   "keywords": [],
   "author": "",
