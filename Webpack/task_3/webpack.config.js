@@ -5,9 +5,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    header: '/home/kevinhuso/holbertonschool-web_react/Webpack/task_3/modules/header/header.js',
-    body: '/home/kevinhuso/holbertonschool-web_react/Webpack/task_3/modules/body/body.js',
-    footer: '/home/kevinhuso/holbertonschool-web_react/Webpack/task_3/modules/footer/footer.js'
+    header: './modules/header/header.js',
+    body: './modules/body/body.js',
+    footer: './modules/footer/footer.js'
   },
   output: {
     path: path.resolve(__dirname, 'task_3/public'),
