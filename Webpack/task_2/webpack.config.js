@@ -1,9 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // Agregamos MiniCssExtractPlugin
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    mode: 'development', // Modo cambiado a 'development'
+    mode: 'production',
     entry: './js/dashboard_main.js',
     output: {
         path: path.resolve(__dirname, 'public'),
@@ -44,6 +46,13 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'bundle.css',
         }),
+        new OptimizeCssAssetsPlugin(),
     ],
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new TerserPlugin(),
+        ],
+    },
 };
 
