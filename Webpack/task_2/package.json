@@ -17,7 +17,8 @@
     "image-webpack-loader": "^8.1.0",
     "style-loader": "^3.3.4",
     "webpack": "^5.90.3",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "html-webpack-plugin": "^5.5.0"
   },
   "dependencies": {
     "jquery": "^3.7.1",
