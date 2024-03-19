@@ -1,0 +1,50 @@
+.App {
+   text-align: left;
+ }
+
+ .Logo-section {
+   display: flex;
+   align-items: center;
+ }
+
+ .App-logo {
+   height: 180px; /* Ajusta el tamaño del logo según sea necesario */
+   margin-right: 10px;
+ }
+
+ .Dashboard-title {
+   color: red;
+   font-size: 44px;
+ }
+
+ header {
+   position: relative; /* Ensure the header is positioned relative to its parent */
+   z-index: 1; /* Set a lower z-index than .Notifications */
+ }
+
+ .Divider {
+   width: 100%;
+   height: 2px;
+   background-color: red;
+   border: none;
+ }
+
+ .Login-message {
+   color: black;
+   margin-left: 35px;/* Puedes ajustar la distancia del borde izquierdo según sea necesario */
+   font-size: 23px;
+   margin-top: 40px;
+ }
+
+ .App-footer {
+   text-align: center;
+   position: fixed;
+   bottom: 0;
+   width: 100%;
+ }
+
+ .Copyright {
+  color: black;
+  font-size: 20px;
+  font-style: italic;
+ }
