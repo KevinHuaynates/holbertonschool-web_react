@@ -1,5 +1,6 @@
+// task_2/dashboard/src/Notifications.js
 import React from 'react';
-import closeIcon from './close-icon.png';
+import './Notifications.css';
 import { getLatestNotification } from './utils';
 
 function Notifications() {
@@ -9,21 +10,22 @@ function Notifications() {
 
   return (
     <div className="Notifications">
-      <button
-        style={{ float: 'right' }}
-        aria-label="Close"
-        onClick={handleClick}
-      >
-        <img src={closeIcon} alt="Close icon" />
-      </button>
-
       <p>Here is the list of notifications</p>
-
       <ul>
         <li data-priority="default">New course available</li>
         <li data-priority="urgent">New resume available</li>
-        <li dangerouslySetInnerHTML={{ __html: getLatestNotification() }} />
+        <li className="latest-notification" dangerouslySetInnerHTML={{ __html: getLatestNotification() }}></li>
       </ul>
+      <button
+        style={{
+          float: 'right',
+          position: 'absolute',
+        }}
+        aria-label="Close"
+        onClick={handleClick}
+      >
+        <img src= "close-icon.png" alt="Close icon" />
+      </button>
     </div>
   );
 }

@@ -1,32 +1,42 @@
 import React from 'react';
 import './App.css';
-import HolbertonLogo from './Holberton Logo.jpg';
+import logo from './Holberton Logo.jpg';
 import { getFullYear, getFooterCopy } from './utils';
+import Notifications from './Notifications';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={HolbertonLogo} className="App-logo" alt="Holberton Logo" />
-        <h1>School dashboard</h1>
+        <Notifications />
+        <div className="Logo-section">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="Dashboard-title">School Dashboard</h1>
+        </div>
+        <hr className="Divider" />
       </header>
       <div className="App-body">
-        <p>Login to access the full dashboard</p>
-        <label htmlFor="email" onClick={() => document.getElementById('email').focus()}>Email:</label>
-        <input type="email" id="email" name="email" />
+        <p className="Login-message">Login to access the full dashboard</p>
 
-        <label htmlFor="password" onClick={() => document.getElementById('password').focus()}>Password:</label>
-        <input type="password" id="password" name="password" />
-
-        <button>OK</button>
+        {/* Wrap form fields in a div with "form-fields" class */}
+        <div className="form-fields">
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input type="email" id="email" />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" />
+          </div>
+          <button>OK</button>
+        </div>
       </div>
       <footer className="App-footer">
-        <p>{getFooterCopy(false)}</p>
-        <p>Copyright {getFullYear()} - {getFooterCopy(true)}</p>
+        <hr className="Divider" />
+        <p className="Copyright">{getFooterCopy(false)} - {getFullYear()}</p>
       </footer>
     </div>
   );
 }
 
 export default App;
-
