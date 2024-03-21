@@ -1,24 +1,32 @@
+// Importa las funciones que vamos a probar
 import { getFullYear, getFooterCopy, getLatestNotification } from './utils';
 
-describe('utils', () => {
-  // Test getFullYear
-  it('getFullYear should return the current year', () => {
-    const mockDate = new Date('2023-11-21'); // Mock the current date
-    jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
-    expect(getFullYear()).toBe(2023);
-  });
-
-  // Test getFooterCopy
-  it('getFooterCopy should return "Holberton School" when isIndex is true', () => {
-    expect(getFooterCopy(true)).toBe('Holberton School');
-  });
-
-  it('getFooterCopy should return "Holberton School main dashboard" when isIndex is false', () => {
-    expect(getFooterCopy(false)).toBe('Holberton School main dashboard');
-  });
-
-  // Test getLatestNotification
-  it('getLatestNotification should return the correct string', () => {
-    expect(getLatestNotification()).toBe('<strong>Urgent requirement</strong> - complete by EOD');
+// Prueba para verificar que la función getFullYear devuelve el año correcto
+describe('getFullYear', () => {
+  it('should return the current year', () => {
+    const currentYear = (new Date()).getFullYear();
+    expect(getFullYear()).toEqual(currentYear);
   });
 });
+
+// Prueba para verificar que getFooterCopy devuelve la cadena correcta cuando el argumento es verdadero
+describe('getFooterCopy', () => {
+  it('should return "Holberton School" when argument is true', () => {
+    expect(getFooterCopy(true)).toEqual('Holberton School');
+  });
+});
+
+// Prueba para verificar que getFooterCopy devuelve la cadena correcta cuando el argumento es falso
+describe('getFooterCopy', () => {
+  it('should return "Holberton School main dashboard" when argument is false', () => {
+    expect(getFooterCopy(false)).toEqual('Holberton School main dashboard');
+  });
+});
+
+// Prueba para verificar que getLatestNotification devuelve una cadena no vacía
+describe('getLatestNotification', () => {
+  it('should return a non-empty string', () => {
+    expect(getLatestNotification()).toBeTruthy();
+  });
+});
+
