@@ -1,0 +1,33 @@
+.Notifications {
+	border: 1px dashed red;
+	padding: 10px;
+
+}
+
+
+.Notifications ul {
+	list-style-type: none;
+}
+
+.Notifications ul li{
+	list-style-type: dsc;
+}
+
+.Notifications ul li[data-priority="default"] {
+	color: blue;
+}
+
+.Notifications ul li[data-priority="urgent"] {
+ 	color: red;
+}
+
+.Notifications ul li:nth-last-child(1){
+	color: red;
+	font-size: 18px;
+}
+
+.Notifications button {
+  position: absolute; /* Position the button absolutely within the Notifications box */
+  top: 10px; /* Adjust the distance from the top as needed */
+  right: 10px; /* Adjust the distance from the right as needed */
+}
