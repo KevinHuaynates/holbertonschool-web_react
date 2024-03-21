@@ -1,50 +1,74 @@
-// js/main.ts
 interface Student {
-  firstName: string;
-  lastName: string;
-  age: number;
-  location: string;
+  firstName: string,
+  lastName: string,
+  age: number,
+  location: string
 }
 
 const student1: Student = {
   firstName: "John",
-  lastName: "Doe",
-  age: 20,
-  location: "London",
+  lastName: "Bongiovi",
+  age: 25,
+  location: "New Jersey"
 };
 
 const student2: Student = {
-  firstName: "Jane",
-  lastName: "Doe",
-  age: 21,
-  location: "Paris",
+  firstName: "Steven",
+  lastName: "Tyler",
+  age: 30,
+  location: "New York"
 };
 
-const studentsList = [student1, student2];
+const studentsList: Student[] = [student1, student2];
 
-const table = document.createElement("table");
-const tableHead = document.createElement("thead");
-const tableBody = document.createElement("tbody");
-const tableRow = document.createElement("tr");
-const tableData = document.createElement("td");
+function createTable(data: Student[], headers: string[]): HTMLElement {
+  // Create the table element
+  const table = document.createElement("table");
 
-tableHead.appendChild(tableRow);
-tableRow.appendChild(tableData);
-tableData.textContent = "First Name";
-tableRow.appendChild(tableData);
-tableData.textContent = "Location";
+  // Create the table header (optional)
+  if (headers) {
+    const tableHead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
 
-tableBody.appendChild(tableRow);
-for (const student of studentsList) {
-  const tableRow = document.createElement("tr");
-  const tableData = document.createElement("td");
-  tableRow.appendChild(tableData);
-  tableData.textContent = student.firstName;
-  tableRow.appendChild(tableData);
-  tableData.textContent = student.location;
-  tableBody.appendChild(tableRow);
+    headers.forEach(header => {
+      const headerCell = document.createElement("th");
+      headerCell.textContent = header;
+      headerRow.appendChild(headerCell);
+    });
+
+    tableHead.appendChild(headerRow);
+    table.appendChild(tableHead);
+  }
+
+  // Create table body
+  const tableBody = document.createElement("tbody");
+
+
+  // Loop through data and create rows
+  data.forEach(row => {
+    const tableRow = document.createElement("tr");
+    const firstName = row["firstName"];
+    const location = row["location"];
+
+    const rowsContent = [firstName, location];
+    // Create cells for each data point in the row
+    for (const content of rowsContent) {
+      const cell = document.createElement("td");
+      cell.textContent = content;
+      tableRow.appendChild(cell);
+    }
+
+    tableBody.appendChild(tableRow);
+  });
+
+  table.appendChild(tableBody);
+
+  // Optionally, append the table to a container element
+  const container = document.body;
+  container.appendChild(table);
+
+  return table;
 }
 
-table.appendChild(tableHead);
-table.appendChild(tableBody);
-document.body.appendChild(table);
+const headers = ["firstName", "location"];
+createTable(studentsList, headers);
