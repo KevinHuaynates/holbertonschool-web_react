@@ -1,1 +1,1 @@
-React_component
+EACT COMPONENT
