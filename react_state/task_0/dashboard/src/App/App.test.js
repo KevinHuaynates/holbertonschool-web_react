@@ -1,3 +1,5 @@
+// App.test.js
+
 import React from "react";
 import App from "./App";
 import { shallow } from "enzyme";
@@ -64,18 +66,15 @@ describe('App component', () => {
     jest.spyOn(window, 'alert').mockRestore(); // Restore original alert behavior
   });
 
-  it('calls handleDisplayDrawer when clicked', () => {
-    const handleDisplayDrawerMock = jest.fn();
-    const wrapper = shallow(<App handleDisplayDrawer={handleDisplayDrawerMock} />);
-    wrapper.find('Notifications').props().handleDisplayDrawer();
-    expect(handleDisplayDrawerMock).toHaveBeenCalled();
-  });
+  it('calls handleDisplayDrawer and handleHideDrawer', () => {
+    const wrapper = shallow(<App />);
+    const instance = wrapper.instance();
 
-  it('calls handleHideDrawer when clicked', () => {
-    const handleHideDrawerMock = jest.fn();
-    const wrapper = shallow(<App handleHideDrawer={handleHideDrawerMock} />);
-    wrapper.find('Notifications').props().handleHideDrawer();
-    expect(handleHideDrawerMock).toHaveBeenCalled();
+    instance.handleDisplayDrawer();
+    expect(instance.state.displayDrawer).toBe(true);
+
+    instance.handleHideDrawer();
+    expect(instance.state.displayDrawer).toBe(false);
   });
 });
 

@@ -1,3 +1,5 @@
+// Notifications.js
+
 import React from 'react';
 import closeIcon from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
@@ -114,25 +116,19 @@ class Notifications extends React.Component {
     console.log(`Notification ${id} has been marked as read`);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.listNotifications.length > this.props.listNotifications.length
-    );
-  }
-
   render() {
     const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;
     const menuItemStyle = displayDrawer ? css(styles.hiddeMenuItem) : css(styles.menuItem, styles.menuItemOpacity, styles.menuItemBounce);
 
     return (
       <div className={css(styles.NotificationsContainer)}>
-        <div className={menuItemStyle} onClick={handleDisplayDrawer}>Your notifications</div> {/* Call handleDisplayDrawer */}
+        <div className={menuItemStyle} onClick={handleDisplayDrawer}>Your notifications</div>
         {displayDrawer && (
           <div className={css(styles.notifications)}>
             <button
               aria-label="Close"
               className={css(styles.button)}
-              onClick={this.handleButtonClick} // Call handleButtonClick
+              onClick={handleHideDrawer}
             >
               <img src={closeIcon} alt="Close icon" width="16px" />
             </button>
@@ -161,8 +157,8 @@ class Notifications extends React.Component {
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
-  handleDisplayDrawer: PropTypes.func, // New prop
-  handleHideDrawer: PropTypes.func, // New prop
+  handleDisplayDrawer: PropTypes.func.isRequired,
+  handleHideDrawer: PropTypes.func.isRequired,
 };
 
 Notifications.defaultProps = {
@@ -170,4 +166,5 @@ Notifications.defaultProps = {
 };
 
 export default Notifications;
+
 

@@ -1,3 +1,5 @@
+// App.js
+
 import React from 'react';
 import Header from '../Header/Header';
 import Notifications from '../Notifications/Notifications';
@@ -44,17 +46,11 @@ class App extends React.Component {
         { id: 2, type: 'urgent', value: 'New resume available' },
         { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
       ],
-      displayDrawer: false, // New state for displaying drawer
+      displayDrawer: false, // Added displayDrawer state
     };
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
-
-  handleDisplayDrawer = () => {
-    this.setState({ displayDrawer: true });
-  };
-
-  handleHideDrawer = () => {
-    this.setState({ displayDrawer: false });
-  };
 
   handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
@@ -71,6 +67,16 @@ class App extends React.Component {
     document.removeEventListener('keydown', this.handleKeyDown);
   }
 
+  // New method to handle displayDrawer state
+  handleDisplayDrawer() {
+    this.setState({ displayDrawer: true });
+  }
+
+  // New method to handle displayDrawer state
+  handleHideDrawer() {
+    this.setState({ displayDrawer: false });
+  }
+
   render() {
     const { isLoggedIn } = this.props;
 
@@ -78,9 +84,9 @@ class App extends React.Component {
       <>
         <Notifications
           listNotifications={this.state.listNotifications}
-          displayDrawer={this.state.displayDrawer} // Pass displayDrawer state
-          handleDisplayDrawer={this.handleDisplayDrawer} // Pass handleDisplayDrawer function
-          handleHideDrawer={this.handleHideDrawer} // Pass handleHideDrawer function
+          displayDrawer={this.state.displayDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
         />
         <div className={css(styles.app)}>
           <Header />
@@ -120,4 +126,3 @@ App.defaultProps = {
 };
 
 export default App;
-
