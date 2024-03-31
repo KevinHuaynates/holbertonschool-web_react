@@ -63,4 +63,19 @@ describe('App component', () => {
     // Restore the original alert function after the test
     jest.spyOn(window, 'alert').mockRestore(); // Restore original alert behavior
   });
+
+  it('calls handleDisplayDrawer when clicked', () => {
+    const handleDisplayDrawerMock = jest.fn();
+    const wrapper = shallow(<App handleDisplayDrawer={handleDisplayDrawerMock} />);
+    wrapper.find('Notifications').props().handleDisplayDrawer();
+    expect(handleDisplayDrawerMock).toHaveBeenCalled();
+  });
+
+  it('calls handleHideDrawer when clicked', () => {
+    const handleHideDrawerMock = jest.fn();
+    const wrapper = shallow(<App handleHideDrawer={handleHideDrawerMock} />);
+    wrapper.find('Notifications').props().handleHideDrawer();
+    expect(handleHideDrawerMock).toHaveBeenCalled();
+  });
 });
+

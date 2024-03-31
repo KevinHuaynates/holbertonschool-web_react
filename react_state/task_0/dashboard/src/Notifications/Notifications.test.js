@@ -169,4 +169,19 @@ describe('Notificatinos component test cases', () => {
 
     expect(instance.shouldComponentUpdate(nextProps)).toBeTruthy();
   });
+
+  it('calls handleDisplayDrawer when clicked', () => {
+    const handleDisplayDrawerMock = jest.fn();
+    const wrapper = shallow(<Notifications handleDisplayDrawer={handleDisplayDrawerMock} />);
+    wrapper.find('div').simulate('click');
+    expect(handleDisplayDrawerMock).toHaveBeenCalled();
+  });
+
+  it('calls handleHideDrawer when close button clicked', () => {
+    const handleHideDrawerMock = jest.fn();
+    const wrapper = shallow(<Notifications handleHideDrawer={handleHideDrawerMock} />);
+    wrapper.find('button').simulate('click');
+    expect(handleHideDrawerMock).toHaveBeenCalled();
+  });
 });
+
