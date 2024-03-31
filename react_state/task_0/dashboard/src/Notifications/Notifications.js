@@ -15,7 +15,7 @@ const NotificationItemShape = PropTypes.shape({
 
 class Notifications extends React.PureComponent {
   handleDisplayDrawer = () => {
-    console.log('Handle display drawer');
+    // Esta función está vacía porque no se necesita ninguna lógica específica aquí
   };
 
   handleHideDrawer = () => {
