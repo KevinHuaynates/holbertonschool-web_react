@@ -1,5 +1,3 @@
-// App.js
-
 import React from 'react';
 import Header from '../Header/Header';
 import Notifications from '../Notifications/Notifications';
@@ -46,10 +44,8 @@ class App extends React.Component {
         { id: 2, type: 'urgent', value: 'New resume available' },
         { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
       ],
-      displayDrawer: false, // Added displayDrawer state
+      displayDrawer: false, // Agregamos la variable displayDrawer al estado
     };
-    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-    this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
 
   handleKeyDown = (event) => {
@@ -67,16 +63,6 @@ class App extends React.Component {
     document.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  // New method to handle displayDrawer state
-  handleDisplayDrawer() {
-    this.setState({ displayDrawer: true });
-  }
-
-  // New method to handle displayDrawer state
-  handleHideDrawer() {
-    this.setState({ displayDrawer: false });
-  }
-
   render() {
     const { isLoggedIn } = this.props;
 
@@ -84,9 +70,7 @@ class App extends React.Component {
       <>
         <Notifications
           listNotifications={this.state.listNotifications}
-          displayDrawer={this.state.displayDrawer}
-          handleDisplayDrawer={this.handleDisplayDrawer}
-          handleHideDrawer={this.handleHideDrawer}
+          displayDrawer={this.state.displayDrawer} // Pasamos displayDrawer al componente Notifications
         />
         <div className={css(styles.app)}>
           <Header />
