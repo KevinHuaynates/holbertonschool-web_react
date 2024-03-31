@@ -18,6 +18,7 @@ class Notifications extends React.PureComponent {
     console.log('Close button has been clicked');
   };
 
+  // This is the corrected handleDisplayDrawer function
   handleDisplayDrawer = () => {
     // Implement logic to show the drawer
   };
@@ -38,35 +39,23 @@ class Notifications extends React.PureComponent {
     };
 
     return (
-      <div className="NotificationsContainer">
-        <div className="menuItem">Your notifications</div>
+      
+        Your notifications
         {displayDrawer && (
-          <div className="Notifications">
-            <button
-              aria-label="Close"
-              style={buttonStyle}
-              onClick={this.handleButtonClick}
-            >
-              <img src={closeIcon} alt="Close icon" width="16px" />
-            </button>
-            <p>Here is the list of notifications</p>
-            <ul>
+          
+            
+            Here is the list of notifications
+            
               {listNotifications.length === 0 && (
-                <tr>
-                  <td colSpan={2}>No new notification for now</td>
-                </tr>
+                
+                  No new notification for now
+                
               )}
               {listNotifications.map((notification) => (
-                <NotificationItem
-                  key={notification.id}
-                  markAsRead={markNotificationAsRead}
-                  {...notification}
-                />
-              ))}
-            </ul>
-          </div>
+                
+          
         )}
-      </div>
+      
     );
   }
 }
