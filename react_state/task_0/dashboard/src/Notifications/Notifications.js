@@ -14,17 +14,12 @@ const NotificationItemShape = PropTypes.shape({
 });
 
 class Notifications extends React.PureComponent {
+  handleDisplayDrawer = () => {
+    console.log('Handle display drawer');
+  };
+
   handleButtonClick = () => {
     console.log('Close button has been clicked');
-  };
-
-  // This is the corrected handleDisplayDrawer function
-  handleDisplayDrawer = () => {
-    // Implement logic to show the drawer
-  };
-
-  handleHideDrawer = () => {
-    // Implement logic to hide the drawer
   };
 
   render() {
@@ -39,23 +34,35 @@ class Notifications extends React.PureComponent {
     };
 
     return (
-      
-        Your notifications
+      <div className="NotificationsContainer">
+        <div className="menuItem">Your notifications</div>
         {displayDrawer && (
-          
-            
-            Here is the list of notifications
-            
+          <div className="Notifications">
+            <button
+              aria-label="Close"
+              style={buttonStyle}
+              onClick={this.handleButtonClick}
+            >
+              <img src={closeIcon} alt="Close icon" width="16px" />
+            </button>
+            <p>Here is the list of notifications</p>
+            <ul>
               {listNotifications.length === 0 && (
-                
-                  No new notification for now
-                
+                <tr>
+                  <td colSpan={2}>No new notification for now</td>
+                </tr>
               )}
               {listNotifications.map((notification) => (
-                
-          
+                <NotificationItem
+                  key={notification.id}
+                  markAsRead={markNotificationAsRead}
+                  {...notification}
+                />
+              ))}
+            </ul>
+          </div>
         )}
-      
+      </div>
     );
   }
 }
@@ -64,8 +71,6 @@ Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
   markNotificationAsRead: PropTypes.func.isRequired,
-  handleDisplayDrawer: PropTypes.func.isRequired, // Add prop type for handleDisplayDrawer
-  handleHideDrawer: PropTypes.func.isRequired, // Add prop type for handleHideDrawer
 };
 
 Notifications.defaultProps = {
@@ -73,3 +78,4 @@ Notifications.defaultProps = {
 };
 
 export default Notifications;
+
