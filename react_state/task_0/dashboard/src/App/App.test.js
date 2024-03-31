@@ -1,6 +1,15 @@
 import React from "react";
-import { shallow } from "enzyme";
 import App from "./App";
+import { shallow } from "enzyme";
+import { StyleSheetTestUtils } from 'aphrodite';
+
+beforeEach(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+})
+
+afterEach(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 describe('App component', () => {
   it('renders the App without crashing', () => {
@@ -38,21 +47,38 @@ describe('App component', () => {
     expect(wrapper.find('CourseList').exists()).toBe(true);
   })
 
-  it('has default state displayDrawer set to false', () => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.state('displayDrawer')).toBe(false);
+  it('calls logOut prop and displays alert when Ctrl+h is pressed', () => {
+    const logOutMock = jest.fn();
+    const windowAlerMock = jest.fn();
+    window.alert = windowAlerMock;
+    
+    const wrapper = shallow(<App isLoggedIn={true} logOut={logOutMock} />);
+
+    // Simulate keydown event with Ctrl+h
+    wrapper.instance().handleKeyDown({ ctrlKey: true, key: 'h' });
+
+    expect(logOutMock).toHaveBeenCalledTimes(1);
+    expect(windowAlerMock).toHaveBeenCalledWith('Logging you out');
+
+    // Restore the original alert function after the test
+    jest.spyOn(window, 'alert').mockRestore(); // Restore original alert behavior
   });
 
-  it('updates state to true after calling handleDisplayDrawer', () => {
+  it('Notifications drawer is hidden by default', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.state().displayDrawer).toEqual(false);
+  });
+
+  it('handleDisplayDrawer shows the notifications drawer', () => {
     const wrapper = shallow(<App />);
     wrapper.instance().handleDisplayDrawer();
-    expect(wrapper.state('displayDrawer')).toBe(true);
+    expect(wrapper.state().displayDrawer).toEqual(true);
   });
 
-  it('updates state to false after calling handleHideDrawer', () => {
+  it('handleHideDrawer hides the notifications drawer', () => {
     const wrapper = shallow(<App />);
-    wrapper.instance().handleDisplayDrawer(); // Set to true first
+    wrapper.instance().handleDisplayDrawer(); // Show drawer first
     wrapper.instance().handleHideDrawer();
-    expect(wrapper.state('displayDrawer')).toBe(false);
+    expect(wrapper.state().displayDrawer).toEqual(false);
   });
 });
