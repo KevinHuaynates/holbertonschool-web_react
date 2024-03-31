@@ -1,15 +1,6 @@
 import React from "react";
-import App from "./App";
 import { shallow } from "enzyme";
-import { StyleSheetTestUtils } from 'aphrodite';
-
-beforeEach(() => {
-  StyleSheetTestUtils.suppressStyleInjection();
-})
-
-afterEach(() => {
-  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-});
+import App from "./App";
 
 describe('App component', () => {
   it('renders the App without crashing', () => {
@@ -47,38 +38,21 @@ describe('App component', () => {
     expect(wrapper.find('CourseList').exists()).toBe(true);
   })
 
-  it('calls logOut prop and displays alert when Ctrl+h is pressed', () => {
-    const logOutMock = jest.fn();
-    const windowAlerMock = jest.fn();
-    window.alert = windowAlerMock;
-    
-    const wrapper = shallow(<App isLoggedIn={true} logOut={logOutMock} />);
-
-    // Simulate keydown event with Ctrl+h
-    wrapper.instance().handleKeyDown({ ctrlKey: true, key: 'h' });
-
-    expect(logOutMock).toHaveBeenCalledTimes(1);
-    expect(windowAlerMock).toHaveBeenCalledWith('Logging you out');
-
-    // Restore the original alert function after the test
-    jest.spyOn(window, 'alert').mockRestore(); // Restore original alert behavior
-  });
-
-  it('Notifications drawer is hidden by default', () => {
+  it('has default state displayDrawer set to false', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.state().displayDrawer).toEqual(false);
+    expect(wrapper.state('displayDrawer')).toBe(false);
   });
 
-  it('handleDisplayDrawer shows the notifications drawer', () => {
+  it('updates state to true after calling handleDisplayDrawer', () => {
     const wrapper = shallow(<App />);
     wrapper.instance().handleDisplayDrawer();
-    expect(wrapper.state().displayDrawer).toEqual(true);
+    expect(wrapper.state('displayDrawer')).toBe(true);
   });
 
-  it('handleHideDrawer hides the notifications drawer', () => {
+  it('updates state to false after calling handleHideDrawer', () => {
     const wrapper = shallow(<App />);
-    wrapper.instance().handleDisplayDrawer(); // Show drawer first
+    wrapper.instance().handleDisplayDrawer(); // Set to true first
     wrapper.instance().handleHideDrawer();
-    expect(wrapper.state().displayDrawer).toEqual(false);
+    expect(wrapper.state('displayDrawer')).toBe(false);
   });
 });

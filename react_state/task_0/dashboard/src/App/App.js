@@ -1,34 +1,12 @@
 import React from 'react';
+import './App.css';
 import Header from '../Header/Header';
 import Notifications from '../Notifications/Notifications';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import CourseList from '../CourseList/CourseList';
-import BodySection from '../BodySection/BodySection';
-import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import PropTypes from 'prop-types';
 import { getLatestNotification } from '../utils/utils';
-import { StyleSheet, css } from 'aphrodite';
-
-const styles = StyleSheet.create({
-  app: {
-    display: 'grid',
-    gridTemplateRows: 'auto 1fr auto',
-    minHeight: '100vh',
-    width: '100%',
-  },
-  body: {
-    borderTop: '4px solid #e0354b',
-    borderBottom: '4px solid #e0354b',
-    padding: '2rem',
-  },
-  footer: {
-    width: '100%',
-    textAlign: 'center',
-    fontStyle: 'italic',
-    fontSize: '1.25rem',
-  },
-});
 
 class App extends React.Component {
   constructor(props) {
@@ -44,66 +22,38 @@ class App extends React.Component {
         { id: 2, type: 'urgent', value: 'New resume available' },
         { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
       ],
-      displayDrawer: false,
+      displayDrawer: false, // Default state for displayDrawer
     };
-    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-    this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
 
-  handleKeyDown = (event) => {
-    if (event.ctrlKey && event.key === 'h') {
-      alert('Logging you out');
-      this.props.logOut();
-    }
-  };
-
-  handleDisplayDrawer() {
+  // Function to set displayDrawer to true
+  handleDisplayDrawer = () => {
     this.setState({ displayDrawer: true });
   };
 
-  handleHideDrawer() {
+  // Function to set displayDrawer to false
+  handleHideDrawer = () => {
     this.setState({ displayDrawer: false });
   };
 
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown);
-  }
-
   render() {
     const { isLoggedIn } = this.props;
-    const { displayDrawer } = this.state;
-
+    const { displayDrawer} = this.state; //Retrieve displayDrawer from state
     return (
       <>
+        {/* Pass displayDrawer state and functions to Notifications */}
         <Notifications
           listNotifications={this.state.listNotifications}
-          displayDrawer={displayDrawer}
+          displayDrawer={this.state.displayDrawer}
           handleDisplayDrawer={this.handleDisplayDrawer}
           handleHideDrawer={this.handleHideDrawer}
         />
-        <div className={css(styles.app)}>
+        <div className="App">
           <Header />
-          <div className={css(styles.body)}>
-            {isLoggedIn ? (
-              <BodySectionWithMarginBottom title="Course list">
-                <CourseList listCourses={this.state.listCourses} />
-              </BodySectionWithMarginBottom>
-            ) : (
-              <BodySectionWithMarginBottom title="Log in to continue">
-                <Login />
-              </BodySectionWithMarginBottom>
-            )}
-            {
-              <BodySection title="News from the School">
-                <p>More news soon...</p>
-              </BodySection>
-            }
+          <div className="App-body">
+            {isLoggedIn ? <CourseList listCourses={this.state.listCourses} /> : <Login />}
           </div>
-          <div className={css(styles.footer)}>
+          <div className="App-footer">
             <Footer />
           </div>
         </div>
@@ -112,14 +62,12 @@ class App extends React.Component {
   }
 }
 
-Notifications.propTypes = {
+App.propTypes = {
   isLoggedIn: PropTypes.bool,
-  logOut: PropTypes.func,
 };
 
-Notifications.defaultProps = {
+App.defaultProps = {
   isLoggedIn: false,
-  logOut: () => {},
 };
 
 export default App;
