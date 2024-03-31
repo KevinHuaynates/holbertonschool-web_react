@@ -126,3 +126,4 @@ App.defaultProps = {
 };
 
 export default App;
+
