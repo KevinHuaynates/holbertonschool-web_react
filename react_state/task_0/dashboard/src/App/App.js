@@ -44,9 +44,17 @@ class App extends React.Component {
         { id: 2, type: 'urgent', value: 'New resume available' },
         { id: 3, type: 'urgent', html: { __html: getLatestNotification() } },
       ],
-      displayDrawer: false, // Agregamos la variable displayDrawer al estado
+      displayDrawer: false,
     };
   }
+
+  handleDisplayDrawer = () => {
+    this.setState({ displayDrawer: true });
+  };
+
+  handleHideDrawer = () => {
+    this.setState({ displayDrawer: false });
+  };
 
   handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === 'h') {
@@ -70,7 +78,9 @@ class App extends React.Component {
       <>
         <Notifications
           listNotifications={this.state.listNotifications}
-          displayDrawer={this.state.displayDrawer} // Pasamos displayDrawer al componente Notifications
+          displayDrawer={this.state.displayDrawer}
+          handleDisplayDrawer={this.handleDisplayDrawer}
+          handleHideDrawer={this.handleHideDrawer}
         />
         <div className={css(styles.app)}>
           <Header />
