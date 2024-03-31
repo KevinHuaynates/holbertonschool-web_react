@@ -18,6 +18,10 @@ class Notifications extends React.PureComponent {
     console.log('Handle display drawer');
   };
 
+  handleHideDrawer = () => {
+    console.log('Handle hide drawer');
+  };
+
   handleButtonClick = () => {
     console.log('Close button has been clicked');
   };
@@ -71,6 +75,8 @@ Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
   markNotificationAsRead: PropTypes.func.isRequired,
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
 };
 
 Notifications.defaultProps = {
